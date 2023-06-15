@@ -21,10 +21,7 @@ class login_Activity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-//        binding.ftButton.setOnClickListener {
-//            val intent= Intent(this,login_Activity::class.java)
-//            startActivity(intent)
-//        }
+
         binding.btnCreate.setOnClickListener{ validateSignup() }
     }
     fun validateSignup(){
