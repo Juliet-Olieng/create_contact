@@ -1,18 +1,16 @@
-package com.juliet.contact2app.database
+import com.google.gson.TypeAdapter
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
+import com.juliet.contact2app.model.ContactData
 
-import androidx.room.TypeConverter
-
-class IntArrayConverter {
-    @TypeConverter
-    fun fromIntArray(intArray: Array<Int>): String {
-        return intArray.joinToString(",")
+class CustomTypeAdapter : TypeAdapter<ContactData>() {
+    override fun write(out: JsonWriter, value: ContactData?) {
+        value?.let {
+            out.value(it.contactId)
+        }
     }
 
-    @TypeConverter
-    fun toIntArray(intArrayString: String): Array<Int> {
-        return intArrayString.split(",").map { it.toInt() }.toTypedArray()
+    override fun read(`in`: JsonReader): ContactData {
+        return ContactData(`in`.nextString())
     }
-
 }
-
-

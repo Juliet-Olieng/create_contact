@@ -2,7 +2,6 @@ package com.juliet.contact2app.viewModel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.juliet.contact2app.R
@@ -17,10 +16,7 @@ class login_Activity : AppCompatActivity() {
         binding= ActivityLogin2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.ftButton.setOnClickListener {
-//            val intent= Intent(this,login_Activity::class.java)
-//            startActivity(intent)
-//        }
+
     }
     override fun onResume() {
         super.onResume()
@@ -51,7 +47,10 @@ class login_Activity : AppCompatActivity() {
         }
 
         if(!error){
-            val newContact=ContactData(contactId = 0,name=name,phoneNumber=phoneNumber, emailAddress = email, avatar = "")
+            val newContact=ContactData(
+                contactId = 0,
+                name =name,
+                phoneNumber =phoneNumber, emailAddress = email, avatar = "")
             contactsViewModel.saveContact(newContact)
             Toast.makeText(this,"Contact created", Toast.LENGTH_SHORT)
                 .show()

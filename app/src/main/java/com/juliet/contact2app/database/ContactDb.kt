@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.juliet.contact2app.model.ContactData
 
 @Database(entities = arrayOf(ContactData::class), version = 1)
@@ -23,3 +24,5 @@ abstract class ContactDb:RoomDatabase() {
         }
     }
 }
+
+

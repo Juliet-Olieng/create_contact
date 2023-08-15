@@ -7,13 +7,15 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.juliet.contact2app.model.ContactData
 
+
 @Dao
 interface ContactDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContact(contact:ContactData)
 
-    @Query("SELECT * FROM contacts ORDER BY name")
+    @Query("SELECT * FROM Contacts ORDER BY name")
     fun getAllContacts():LiveData<List<ContactData>>
-    @Query("SELECT * FROM contacts WHERE contactId=:contactId")
-    fun getContactById(contactId:Int):LiveData<ContactData>
+@Query("SELECT * FROM Contacts WHERE contactId = :contactId")
+fun getContactById(contactId: ContactData): LiveData<ContactData>
+
 }

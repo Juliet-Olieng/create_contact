@@ -1,26 +1,29 @@
-package com.juliet.contact2app.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.juliet.contact2app.R
-import com.juliet.contact2app.databinding.ActivityContactDetailsBinding
+import com.juliet.contact2app.model.ContactData
 import com.juliet.contact2app.viewModel.ContactsViewModel
 
 class ContactDetailsActivity : AppCompatActivity() {
-//    val contactsViewModel:ContactsViewModel by viewModels()
-    var contactId=0
-    lateinit var binding: ActivityContactDetailsBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val contactsViewModel: ContactsViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityContactDetailsBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_contact_details)
-        var bundle=intent.extras
-        if (bundle!=null){
-            contactId =bundle.getInt("CONTACT_ID")
-            Toast.makeText(this,"Contact details", Toast.LENGTH_SHORT).show()
+
+        val selectedContact: ContactData? = intent.getParcelableExtra("SELECTED_CONTACT")
+
+        selectedContact?.let { contact ->
+            val detailedContact = contactsViewModel.getContactById(contact.contactId)
+            detailedContact?.let { detailed ->
+                findViewById<TextView>(R.id.etName).text = detailed.toString()
+                findViewById<TextView>(R.id.etNumber).text = detailed.toString()
+            }
         }
+
     }
 }
+

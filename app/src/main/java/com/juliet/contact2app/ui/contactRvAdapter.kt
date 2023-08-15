@@ -1,5 +1,6 @@
 package com.juliet.contact2app.ui
 
+import ContactDetailsActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater

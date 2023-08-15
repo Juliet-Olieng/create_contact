@@ -3,4 +3,8 @@
     <string name="first_name_is_required">First name is required</string>
     <string name="email_is_required">Email is required</string>
     <string name="phone_number_is_required">Phone number is required</string>
+    <string name="phonenumber">phonenumber</string>
+    <string name="name">Name</string>
+    <string name="input_number">Input Number</string>
+    <string name="email">Email</string>
 </resources>
