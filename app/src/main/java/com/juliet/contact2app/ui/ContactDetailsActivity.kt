@@ -1,29 +1,31 @@
+package com.juliet.contact2app.ui
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.juliet.contact2app.R
-import com.juliet.contact2app.model.ContactData
+import androidx.lifecycle.lifecycleScope
+import com.juliet.contact2app.databinding.ActivityContactDetailsBinding
 import com.juliet.contact2app.viewModel.ContactsViewModel
+import kotlinx.coroutines.launch
 
 class ContactDetailsActivity : AppCompatActivity() {
     private val contactsViewModel: ContactsViewModel by viewModels()
-
+    private lateinit var binding: ActivityContactDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_details)
+        binding = ActivityContactDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val selectedContactId: Int = intent.getIntExtra("CONTACT_ID", 0)
+        contactsViewModel.getContactById(selectedContactId.toString())
+        observeContactIfo()
+    }
 
-        val selectedContact: ContactData? = intent.getParcelableExtra("SELECTED_CONTACT")
-
-        selectedContact?.let { contact ->
-            val detailedContact = contactsViewModel.getContactById(contact.contactId)
-            detailedContact?.let { detailed ->
-                findViewById<TextView>(R.id.etName).text = detailed.toString()
-                findViewById<TextView>(R.id.etNumber).text = detailed.toString()
-            }
+    private fun observeContactIfo() = lifecycleScope.launch {
+        contactsViewModel.contactLiveData.observe(this@ContactDetailsActivity) {
+            if (it == null) return@observe
+            binding.etName.setText(it.name)
+            binding.etNumber.setText(it.phoneNumber)
         }
-
     }
 }
 

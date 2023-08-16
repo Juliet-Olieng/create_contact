@@ -17,6 +17,5 @@ interface ContactDao {
     @Query("SELECT * FROM Contacts ORDER BY name")
     fun getAllContacts():LiveData<List<ContactData>>
 @Query("SELECT * FROM Contacts WHERE contactId = :contactId")
-fun getContactById(contactId: ContactData): LiveData<ContactData>
-
+fun getContactById(contactId: String?): LiveData<ContactData>
 }

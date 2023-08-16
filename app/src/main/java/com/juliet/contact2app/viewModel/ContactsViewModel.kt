@@ -21,6 +21,6 @@ class ContactsViewModel:ViewModel() {
         return contactsRepo.getDbContact()
     }
     fun getContactById(contactId: String){
-        contactLiveData= contactsRepo.getContactById(contactId)
+        contactLiveData = contactsRepo.getContactById(contactId)
     }
 }
