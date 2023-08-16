@@ -33,7 +33,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayContact(contactList: List<ContactData>) {
-        val contactAdapter = ContactRvAdapter(contactList, this)
+        val contactAdapter = ContactRvAdapter(contactList) {
+            val intent = Intent(binding.root.context, ContactDetailsActivity::class.java)
+            intent.putExtra("CONTACT_ID", it.contactId)
+            binding.root.context.startActivity(intent)
+        }
         binding.rvContact.layoutManager = LinearLayoutManager(this)
         binding.rvContact.adapter = contactAdapter
     }

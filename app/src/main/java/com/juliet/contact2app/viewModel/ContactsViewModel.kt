@@ -1,6 +1,7 @@
 package com.juliet.contact2app.viewModel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juliet.contact2app.model.ContactData
@@ -9,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ContactsViewModel : ViewModel() {
     private val contactsRepo = ContactRepository()
-    lateinit var contactLiveData: LiveData<ContactData>
+    var contactLiveData: LiveData<ContactData> = MutableLiveData()
 
     fun saveContact(contact: ContactData) {
         viewModelScope.launch {
