@@ -1,4 +1,4 @@
-
+package com.juliet.contact2app.ui
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -14,14 +14,15 @@ class ContactDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_details)
 
-        val selectedContact: ContactData? = intent.getParcelableExtra("SELECTED_CONTACT")
+
+        val selectedContact: ContactData? = intent.getParcelableExtra("CONTACT")
 
         selectedContact?.let { contact ->
-            val detailedContact = contactsViewModel.getContactById(contact.contactId)
-            detailedContact?.let { detailed ->
-                findViewById<TextView>(R.id.etName).text = detailed.toString()
-                findViewById<TextView>(R.id.etNumber).text = detailed.toString()
-            }
+//            val detailedContact = contactsViewModel.getContactById(contact.contactId)
+//            detailedContact?.let { detailed ->
+                findViewById<TextView>(R.id.etName).text = contact.name
+                findViewById<TextView>(R.id.etNumber).text =contact.phoneNumber
+//            }
         }
 
     }

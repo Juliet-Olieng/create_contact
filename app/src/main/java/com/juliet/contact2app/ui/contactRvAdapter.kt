@@ -1,6 +1,5 @@
 package com.juliet.contact2app.ui
 
-import ContactDetailsActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -35,6 +34,7 @@ class ContactRvAdapter(var contactList: List<ContactData>, val context:Context):
         binding.IvContact.setOnClickListener{
             val intent=Intent(context, ContactDetailsActivity::class.java)
             intent.putExtra("CONTACT_ID",currentContact.contactId)
+            intent.putExtra("CONTACT",currentContact)
             context.startActivity(intent)
         }
     }

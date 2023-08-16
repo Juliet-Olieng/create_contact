@@ -1,5 +1,4 @@
 package com.juliet.contact2app.model
-import CustomTypeAdapter
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
@@ -46,6 +45,3 @@ data class ContactData(
     }
 }
 
-val gson: Gson = GsonBuilder()
-    .registerTypeAdapter(ContactData::class.java, CustomTypeAdapter())
-    .create()
