@@ -1,5 +1,6 @@
 package com.juliet.contact2app.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import com.juliet.contact2app.model.ContactData
 import com.juliet.contact2app.viewModel.ContactsViewModel
 import com.juliet.contact2app.viewModel.login_Activity
 
+@SuppressLint("IntentWithNullActionLaunch")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val contactsViewModel: ContactsViewModel by viewModels()
@@ -25,14 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        contactsViewModel.getContacts().observe(this) { contacts -> displayContact(contacts) }
+        contactsViewModel.getContacts().observe(this) { contacts ->
+            displayContact(contacts)
+        }
     }
 
     private fun displayContact(contactList: List<ContactData>) {
         val contactAdapter = ContactRvAdapter(contactList, this)
         binding.rvContact.layoutManager = LinearLayoutManager(this)
         binding.rvContact.adapter = contactAdapter
-
     }
-
 }

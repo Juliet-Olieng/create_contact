@@ -1,6 +1,6 @@
 package com.juliet.contact2app.ui
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,18 +10,19 @@ import com.juliet.contact2app.model.ContactData
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
-class ContactRvAdapter(var contactList: List<ContactData>, val context:Context):RecyclerView.Adapter<ContactViewHolder>() {
+@SuppressLint("IntentWithNullActionLaunch")
+class ContactRvAdapter(private var contactList: List<ContactData>) : RecyclerView.Adapter<ContactViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        var binding=ContactListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ContactListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ContactViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        var currentContact=contactList[position]
-        var binding=holder.binding
-        holder.binding.tvName.text=currentContact.name
-        holder.binding.tvEmail.text=currentContact.emailAddress
-        holder.binding.tvNumber.text=currentContact.phoneNumber
+        val currentContact = contactList[position]
+        val binding = holder.binding
+        holder.binding.tvName.text = currentContact.name
+        holder.binding.tvEmail.text = currentContact.emailAddress
+        holder.binding.tvNumber.text = currentContact.phoneNumber
         if (currentContact.avatar.isNotBlank()) {
             Picasso
                 .get()
@@ -31,10 +32,10 @@ class ContactRvAdapter(var contactList: List<ContactData>, val context:Context):
                 .transform(CropCircleTransformation())
                 .into(binding.IvContact)
         }
-        binding.IvContact.setOnClickListener{
-            val intent=Intent(context, ContactDetailsActivity::class.java)
-            intent.putExtra("CONTACT_ID",currentContact.contactId)
-            context.startActivity(intent)
+        binding.IvContact.setOnClickListener {
+            val intent = Intent(binding.root.context, ContactDetailsActivity::class.java)
+            intent.putExtra("CONTACT_ID", currentContact.contactId)
+            binding.root.context.startActivity(intent)
         }
     }
 
@@ -43,4 +44,5 @@ class ContactRvAdapter(var contactList: List<ContactData>, val context:Context):
     }
 
 }
-class ContactViewHolder(var binding: ContactListBinding): RecyclerView.ViewHolder(binding.root){}
+
+class ContactViewHolder(var binding: ContactListBinding) : RecyclerView.ViewHolder(binding.root) {}
